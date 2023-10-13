@@ -1,0 +1,143 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+    class Task {
+        private String description;
+
+        public Task(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+    }
+
+    class Note {
+        private String content;
+
+        public Note(String content) {
+            this.content = content;
+        }
+
+        public String getContent() {
+            return content;
+        }
+    }
+
+    class Reminder {
+        private String reminderText;
+
+        public Reminder(String reminderText) {
+            this.reminderText = reminderText;
+        }
+
+        public String getReminderText() {
+            return reminderText;
+        }
+    }
+
+    public class PersonalOrganizer {
+        private static ArrayList<Task> tasks = new ArrayList<>();
+        private static ArrayList<Note> notes = new ArrayList<>();
+        private static ArrayList<Reminder> reminders = new ArrayList<>();
+
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+
+            while (true) {
+                System.out.println("\nPersonal Organizer Menu:");
+                System.out.println("1. Add Task");
+                System.out.println("2. View Tasks");
+                System.out.println("3. Add Note");
+                System.out.println("4. View Notes");
+                System.out.println("5. Set Reminder");
+                System.out.println("6. View Reminders");
+                System.out.println("7. Exit");
+                System.out.print("Enter your choice: ");
+
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1:
+                        addTask(scanner);
+                        break;
+                    case 2:
+                        viewTasks();
+                        break;
+                    case 3:
+                        addNote(scanner);
+                        break;
+                    case 4:
+                        viewNotes();
+                        break;
+                    case 5:
+                        setReminder(scanner);
+                        break;
+                    case 6:
+                        viewReminders();
+                        break;
+                    case 7:
+                        System.out.println("Exiting Personal Organizer. Goodbye!");
+                        System.exit(0);
+                    default:
+                        System.out.println("Invalid choice. Please enter a valid option.");
+                }
+            }
+        }
+
+        private static void addTask(Scanner scanner) {
+            System.out.print("Enter task description: ");
+            String description = scanner.nextLine();
+            tasks.add(new Task(description));
+            System.out.println("Task added successfully!");
+        }
+
+        private static void viewTasks() {
+            if (tasks.isEmpty()) {
+                System.out.println("No tasks found.");
+            } else {
+                System.out.println("Tasks:");
+                for (Task task : tasks) {
+                    System.out.println("- " + task.getDescription());
+                }
+            }
+        }
+
+        private static void addNote(Scanner scanner) {
+            System.out.print("Enter note content: ");
+            String content = scanner.nextLine();
+            notes.add(new Note(content));
+            System.out.println("Note added successfully!");
+        }
+
+        private static void viewNotes() {
+            if (notes.isEmpty()) {
+                System.out.println("No notes found.");
+            } else {
+                System.out.println("Notes:");
+                for (Note note : notes) {
+                    System.out.println("- " + note.getContent());
+                }
+            }
+        }
+
+        private static void setReminder(Scanner scanner) {
+            System.out.print("Enter reminder text: ");
+            String reminderText = scanner.nextLine();
+            reminders.add(new Reminder(reminderText));
+            System.out.println("Reminder set successfully!");
+        }
+
+        private static void viewReminders() {
+            if (reminders.isEmpty()) {
+                System.out.println("No reminders found.");
+            } else {
+                System.out.println("Reminders:");
+                for (Reminder reminder : reminders) {
+                    System.out.println("- " + reminder.getReminderText());
+                }
+            }
+        }
+    }
